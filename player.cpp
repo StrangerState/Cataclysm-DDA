@@ -1431,7 +1431,7 @@ std::string player::save_info()
   dump << failed_missions[i] << " ";
 
  dump << std::endl;
- 
+
  dump << dump_memorial();
 
  dump << inv.save_str_no_quant();
@@ -3954,30 +3954,28 @@ void player::infect(dis_type type, body_part vector, int strength,
   add_disease(type, duration);
 }
 
-void player::add_disease(dis_type type, int duration,
-                         int intensity, int max_intensity)
-{
- if (duration == 0)
-  return;
- bool found = false;
- int i = 0;
- while ((i < illness.size()) && !found) {
-  if (illness[i].type == type) {
-   illness[i].duration += duration;
-   illness[i].intensity += intensity;
-   if (max_intensity != -1 && illness[i].intensity > max_intensity)
-    illness[i].intensity = max_intensity;
-   found = true;
-  }
-  i++;
- }
- if (!found) {
-  if (!is_npc())
-   dis_msg(g, type);
-  disease tmp(type, duration, intensity);
-  illness.push_back(tmp);
- }
-// activity.type = ACT_NULL;
+void player::add_disease(dis_type type, int duration, int intensity, int max_intensity) {
+    if (duration == 0) { return; }
+    int i;
+    bool found;
+    for (i=0, found=false; i < illness.size() && !found; i++) {
+        if (illness[i].type == type) {
+            found = true;
+            illness[i].duration += duration;
+            illness[i].intensity += intensity;
+            if (max_intensity != -1 && illness[i].intensity > max_intensity) {
+                illness[i].intensity = max_intensity;
+            }
+        }
+    }
+    if (!found) {
+        if (!is_npc()) {
+            dis_msg(g, type);
+        }
+        disease tmp(type, duration, intensity);
+        illness.push_back(tmp);
+        g->cancel_activity_query(_("You feel unwell."));
+    }
 }
 
 void player::rem_disease(dis_type type)
@@ -8208,11 +8206,56 @@ void player::assign_activity(game* g, activity_type type, int moves, int index, 
   activity = player_activity(type, moves, index, invlet, name);
 }
 
-void player::cancel_activity()
-{
- if (activity_is_suspendable(activity.type))
-  backlog = activity;
- activity.type = ACT_NULL;
+void player::cancel_activity() {
+    if (activity_is_suspendable(activity.type)) {
+        backlog = activity;
+    }
+    activity.type = ACT_NULL;
+}
+
+void player::halt_activity(game *g) {
+    activity_type actT = activity.type;
+    if (actT == ACT_NULL) {
+        return;
+    }
+    std::string actName;
+
+    // big switch; could be redone with a map or a struct
+    switch(actT) {
+        case ACT_RELOAD:
+            actName = "reloading";
+            break;
+        case ACT_READ:
+            actName = "reading";
+            break;
+        case ACT_FORAGE:
+            actName = "foraging";
+            break;
+        case ACT_CRAFT:
+        case ACT_LONGCRAFT:
+            actName = "crafting";
+            break;
+        case ACT_BUILD:
+        case ACT_VEHICLE:
+            actName = "constructing";
+            break;
+        case ACT_DISASSEMBLE:
+            actName = "the disassembly";
+        case ACT_REFILL_VEHICLE:
+            actName = "refueling the vehicle";
+            break;
+        case ACT_WAIT:
+            actName = "waiting, and snap to attention";
+            break;
+        default:
+            actName = "what you were doing";
+            break;
+    }
+    activity.type = ACT_NULL;
+    if (!actName.empty()) {
+        g->add_msg(_("You stop %s."), actName.c_str());
+    }
+    cancel_activity();
 }
 
 std::vector<item*> player::has_ammo(ammotype at)

@@ -430,7 +430,7 @@ void npc::randomize(game *g, npc_class type)
 
  case NC_COWBOY:
   for (std::vector<Skill*>::iterator aSkill = Skill::skills.begin(); aSkill != Skill::skills.end(); ++aSkill) {
-   int level = dice(3, 2) - rng(0, 4);	
+   int level = dice(3, 2) - rng(0, 4);
    if (level < 0)
    {
     level = 0;
@@ -1764,6 +1764,11 @@ bool npc::is_enemy()
 bool npc::is_defending()
 {
  return (attitude == NPCATT_DEFEND);
+}
+bool npc::is_alive() {
+    // This can be expanded upon for other causes of death
+    bool bodyOK = (hp_cur[hp_head] > 0 && hp_cur[hp_torso] > 0);
+    return bodyOK;
 }
 
 int npc::danger_assessment(game *g)

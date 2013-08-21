@@ -455,6 +455,7 @@ public:
  bool is_friend(); // Allies with the player
  bool is_leader(); // Leading the player
  bool is_defending(); // Putting the player's safety ahead of ours
+ bool is_alive();  // We have to make sure
 // What happens when the player makes a request
  void told_to_help(game *g);
  void told_to_wait(game *g);

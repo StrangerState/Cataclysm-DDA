@@ -32,8 +32,7 @@ std::string melee_verb(technique_id tech, player &p, int bash_dam, int cut_dam, 
  *   skills, torso encumberment penalties and drunken master bonuses.
  */
 
-bool player::is_armed()
-{
+bool player::is_armed() {
  return (weapon.typeId() != "null" && !weapon.is_style());
 }
 
@@ -294,7 +293,7 @@ void player::hit_player(game *g, player &p, bool allow_grab)
 
  if (bash_dam + cut_dam + stab_dam <= 0)
   return; // Defensive technique canceled our attack!
-    
+
  if (critical_hit) // Crits cancel out Toad Style's armor boost
   p.rem_disease("armor_boost");
 
@@ -994,6 +993,63 @@ technique_id player::pick_defensive_technique(game *g, monster *z, player *p)
  return TEC_NULL;
 }
 
+int player::passive_damage_spines(game* g, monster* attacker) {
+    // Nitpick:
+    // Quills are usually a passive, nonlethal defense, at least when venom isn't involved.
+    // They are more about pain and infection rather than lethal damage.
+    int spineDamage;
+    std::string spineName;
+    int spinesMax = 0;
+    if (has_trait(PF_SPINES)) {
+        spinesMax += 8;
+        spineName = "spines";
+    }
+    if (has_trait(PF_QUILLS)) {
+        spinesMax += 12;
+        if (!spineName.empty()) {
+            spineName += " and ";
+        }
+        spineName += "quills";
+    }
+    spineDamage = rng(1, spinesMax);
+    if (g->u_see(posx, posy)) {
+        if (is_npc()) {
+            g->add_msg(_("The %s is pricked by %s's %s!"), attacker->name().c_str(), name.c_str(), spineName.c_str());
+        } else {
+            g->add_msg(_("It is pricked by your %s!"), spineName.c_str());
+        }
+    }
+    return spineDamage;
+}
+
+int player::passive_damage_bionics(game* g, monster* attacker) {
+    // stand-in for defensive systems of variable strength level
+    const int efStrength = 5;
+    std::string shockVerb;
+    // let's accumulate counter damage to allow overkill
+    int shockamt = rng(1*efStrength, 10*efStrength);
+    if (shockamt >= 50) {
+        shockVerb = "fried";
+    } else if (shockamt >= 25) {
+        shockVerb = "electrocuted";
+    } else if (shockamt >= 5) {
+        shockVerb = "shocked";
+    } else {
+        shockVerb = "zapped";
+    }
+    if (g->u_see(posx, posy)) {
+        if (is_npc()) {
+            g->add_msg(_("%s crackles with electric energy!"), name.c_str());
+        /* } else {
+                g->add_msg(_("Your internal defenses crackle to life!"));
+            ^ gets old; we know we installed it, and we know it when it's active
+        */
+        }
+        g->add_msg(_("The %s is %s!"), attacker->name().c_str(), shockVerb.c_str());
+    }
+    return shockamt;
+}
+
 void player::perform_defensive_technique(
   technique_id technique, game *g, monster *z, player *p,
   body_part &bp_hit, int &side, int &bash_dam, int &cut_dam, int &stab_dam)
@@ -1555,6 +1611,7 @@ void hit_message(game *g, bool is_u, std::string You, std::string your, std::str
         if(crit) part1 = _("Critical! ") + part1;
     }
     g->add_msg((part1+part2).c_str());
+
 }
 
 void melee_practice(const calendar& turn, player &u, bool hit, bool unarmed,

@@ -850,11 +850,11 @@ void dis_effect(game *g, player &p, disease &dis)
       p.hunger--;
       p.thirst--;
     }
-	
+
 	// Check mutation category strengths to see if we're mutated enough to get a dream
 	mutation_category highcat = p.get_highest_category();
 	int highest = p.get_category_level(highcat);
-	
+
 	// Determine the strength of effects or dreams based upon category strength
 	int strength = 0;	// Category too weak for any effect or dream
 	if (highest >= 20 && highest < 35)
@@ -869,7 +869,7 @@ void dis_effect(game *g, player &p, disease &dis)
 	{
 		strength = 3;	// High strength
 	}
-	
+
 	// See if we'll get a dream
 	if ((!strength == 0)) //Only if category strength is high enough to get a dream.
 	{
@@ -1021,16 +1021,18 @@ void dis_effect(game *g, player &p, disease &dis)
   break;
 
  case DI_BLEED:
-  if (one_in(6)) {
-      g->add_msg_player_or_npc( &p, _("You lose some blood."), _("<npcname> loses some blood.") );
-
-      p.pain++;
-      p.hurt(g, bp_torso, 0, 1);
-      p.per_cur--;
-      p.str_cur --;
-      g->m.add_field(g, p.posx, p.posy, fd_blood, 1);
-  }
-  break;
+    // g->add_msg_if_player(&p,_("You bleed."));  // Very repetitive. x10
+    p.pain++; p.per_cur--; p.str_cur--;
+    p.hurt(g, bp_torso, 0, dis.intensity);
+    if (dis.duration <= 1) {
+        if (dis.intensity >= 5) {
+            g->add_msg_if_player(&p, _("The bleeding slows to a stop."));
+        }
+        dis.intensity = 0;
+    } else if (dis.intensity > 5) {
+        g->m.add_field(g, p.posx, p.posy, fd_blood, dis.intensity/5);
+    }
+    break;
 
  case DI_BADPOISON:
   if ((!p.has_trait(PF_POISRESIST) && one_in(100)) ||
@@ -1953,7 +1955,7 @@ Your feet are blistering from the intense heat. It is extremely painful.");
         "Perception - 1;   Dexterity - 1;   Strength - 2 IF not resistant\n"
         "Occasional pain and/or damage.");
 
-    case DI_BLEED: return _("You are slowly losing blood.");
+    case DI_BLEED: return _("You are losing blood.");
 
     case DI_BADPOISON:
         return _(

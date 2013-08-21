@@ -53,6 +53,7 @@ public:
  void pick_name(); // Picks a name from NAMES_*
 
  virtual bool is_npc() { return false; }	// Overloaded for NPCs in npc.h
+ virtual bool is_alive() { return true; };  // NPCs
  nc_color color();				// What color to draw us as
 
  virtual void load_info(game *g, std::string data);// Load from file 'name.sav'
@@ -140,7 +141,8 @@ public:
  void perform_defensive_technique(technique_id technique, game *g, monster *z,
                                   player *p, body_part &bp_hit, int &side,
                                   int &bash_dam, int &cut_dam, int &stab_dam);
-
+ int passive_damage_bionics(game *g, monster *attacker);
+ int passive_damage_spines(game *g, monster *attacker);
  void perform_special_attacks(game *g, monster *z, player *p,
                         int &bash_dam, int &cut_dam, int &pierce_dam);
 
@@ -250,8 +252,19 @@ public:
  void practice(const calendar& turn, Skill *s, int amount);
  void practice(const calendar& turn, std::string s, int amount);
 
- void assign_activity(game* g, activity_type type, int moves, int index = -1, char invlet = 0, std::string name = "");
+ void assign_activity(game* g, activity_type type, int moves,
+                      int index=-1, char invlet=0, std::string name="");
+
+/**
+ * Nullifies the player's current action and sets the backlog if applicable.
+ */
  void cancel_activity();
+
+/**
+ * Calls player::cancel_activity after printing a game message to announce the interruption.
+ * The message is determined by the activity_type of the player's current activity.
+ */
+ void halt_activity(game *g);
 
  int weight_carried();
  int volume_carried();

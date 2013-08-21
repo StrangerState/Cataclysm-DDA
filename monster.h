@@ -112,6 +112,7 @@ class monster {
  point scent_move(game *g);
  point wander_next(game *g);
  void hit_player(game *g, player &p, bool can_grab = true);
+ void grab_player(game* g, player p);
  int calc_movecost(game *g, int x1, int y1, int x2, int y2);
 
  /**
@@ -177,6 +178,7 @@ class monster {
 				// Returns false if no such monster exists
  void make_friendly();
  void add_item(item it);	// Add an item to inventory
+ void process_anger(int amount);  // Adjust morale negatively according to amount
 
 // TEMP VALUES
  int posx, posy;

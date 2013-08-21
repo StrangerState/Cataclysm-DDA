@@ -1265,6 +1265,16 @@ npc* game::find_npc(int id)
     return NULL;
 }
 
+void game::kill_npc(player* p) {
+    if (!p->is_npc()) { return; }
+    int index = npc_at(p->posx, p->posy);
+    npc* tmp = dynamic_cast<npc*>(p);
+    tmp->die(this);
+    if (index != -1 && index < active_npc.size()) {
+        active_npc.erase(active_npc.begin() + index);
+    }
+}
+
 int game::kill_count(mon_id mon){
  std::vector<mtype *> types;
  for (int i = 0; i < num_monsters; i++) {
