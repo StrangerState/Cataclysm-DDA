@@ -152,6 +152,7 @@ void init_translation() {
     monStr2monId["mon_fox_gray"] = mon_fox_gray;
     monStr2monId["mon_fox_red"] = mon_fox_red;
     monStr2monId["mon_hare"] = mon_hare;
+    monStr2monId["mon_mink"] = mon_mink;
     monStr2monId["mon_moose"] = mon_moose;
     monStr2monId["mon_muskrat"] = mon_muskrat;
     monStr2monId["mon_otter"] = mon_otter;
