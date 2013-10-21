@@ -36,7 +36,9 @@ struct mongroup {
         diffuse = false;
     }
     bool is_safe() {
-        return (type == "GROUP_NULL" || type == "GROUP_FOREST");
+        return (type == "GROUP_NULL" ||
+                type == "GROUP_FOREST" ||
+                type == "GROUP_DOMESTIC");
     };
 };
 

@@ -795,7 +795,7 @@
     "special_freq":0,
     "death_function":"NORMAL",
     "special_attack":"NONE",
-    "description":"A large omnivorous rodent with a thick furry pelt, living in wetlands all across the northern hemisphere.  It marks its territory with a musky odor for which it is named.",
+    "description":"A large omnivorous rodent with a thick furry pelt, found in wetlands across the northern hemisphere.  It marks its territory with a musky odor for which it is named.",
     "flags":["SEES", "SMELLS", "HEARS", "WARM", "SWIMS", "ANIMAL", "FUR", "VIS40", "BONES"],
     "fear_triggers":["FIRE", "PLAYER_CLOSE", "SOUND", "HURT"],
     "categories":["WILDLIFE"]

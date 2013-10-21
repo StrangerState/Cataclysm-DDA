@@ -9063,50 +9063,47 @@ $$$$-|-|=HH-|-HHHH-|####\n",
   }
 }break;
 
- case ot_cave:
-  if (t_above == ot_cave) { // We're underground!
-   for (int i = 0; i < SEEX * 2; i++) {
-    for (int j = 0; j < SEEY * 2; j++) {
-     if (rng(0, 6) < i || SEEX * 2 - rng(1, 7) > i ||
-         rng(0, 6) < j || SEEY * 2 - rng(1, 7) > j   )
-      ter_set(i, j, t_rock_floor);
-     else
-      ter_set(i, j, t_rock);
-    }
-   }
-   square(this, t_slope_up, SEEX - 1, SEEY - 1, SEEX, SEEY);
+    case ot_cave:
+        if (t_above == ot_cave) {
+            // We're underground!
+            for (int i = 0; i < SEEX * 2; i++) {
+                for (int j = 0; j < SEEY * 2; j++) {
+                    bool floorHere = (rng(0, 6) < i || SEEX * 2 - rng(1, 7) > i ||
+                                      rng(0, 6) < j || SEEY * 2 - rng(1, 7) > j );
+                    if (floorHere) {
+                        ter_set(i, j, t_rock_floor);
+                    } else {
+                        ter_set(i, j, t_rock);
+                    }
+                }
+            }
 
-   switch (rng(1, 3)) { // What type of cave is it?
-   case 1: // Bear cave
-    add_spawn("mon_bear", 1, rng(SEEX - 6, SEEX + 5), rng(SEEY - 6, SEEY + 5));
-    if (one_in(4))
-     add_spawn("mon_bear", 1, rng(SEEX - 6, SEEX + 5), rng(SEEY - 6, SEEY + 5));
-    place_items("ant_food", 80, 0, 0, SEEX * 2 - 1, SEEY * 2 - 1, true, 0);
-    break;
-   case 2: // Wolf cave!
-    do
-     add_spawn("mon_wolf", 1, rng(SEEX - 6, SEEX + 5), rng(SEEY - 6, SEEY + 5));
-    while (one_in(2));
-    place_items("ant_food", 86, 0, 0, SEEX * 2 - 1, SEEY * 2 - 1, true, 0);
-    break;
-   case 3: { // Hermit cave
-    int origx = rng(SEEX - 1, SEEX), origy = rng(SEEY - 1, SEEY),
-        hermx = rng(SEEX - 6, SEEX + 5), hermy = rng(SEEX - 6, SEEY + 5);
-    std::vector<point> bloodline = line_to(origx, origy, hermx, hermy, 0);
-    for (int ii = 0; ii < bloodline.size(); ii++)
-     add_field(g, bloodline[ii].x, bloodline[ii].y, fd_blood, 2);
-    item body;
-    body.make_corpse(g->itypes["corpse"], GetMType("mon_null"), g->turn);
-    add_item(hermx, hermy, body);
-    place_items("rare", 25, hermx - 1, hermy - 1, hermx + 1, hermy + 1,true,0);
-   } break;
-   }
-
-  } else { // We're above ground!
+            square(this, t_slope_up, SEEX - 1, SEEY - 1, SEEX, SEEY);
+            if (one_in(5)) {
+                place_items("ant_food", 80, 0, 0, SEEX * 2 - 1, SEEY * 2 - 1, true, 0);
+            } else if (one_in(5)) {
+                place_items("ant_food", 86, 0, 0, SEEX * 2 - 1, SEEY * 2 - 1, true, 0);
+            } else if (one_in(10)) {
+                // hermit cave
+                int origx = rng(SEEX - 1, SEEX),
+                    origy = rng(SEEY - 1, SEEY),
+                    hermx = rng(SEEX - 6, SEEX + 5),
+                    hermy = rng(SEEX - 6, SEEY + 5);
+                std::vector<point> bloodline = line_to(origx, origy, hermx, hermy, 0);
+                for (int ii = 0; ii < bloodline.size(); ii++) {
+                    add_field(g, bloodline[ii].x, bloodline[ii].y, fd_blood, 2);
+                }
+                item body;
+                body.make_corpse(g->itypes["corpse"], GetMType("mon_null"), g->turn);
+                add_item(hermx, hermy, body);
+                place_items("rare", 25, hermx-1, hermy-1, hermx+1, hermy+1, true, 0);
+            }
+            place_spawns(g, "GROUP_CAVE", 2, 6, 6, 18,18, density);
+        } else { // We're above ground!
 // First, draw a forest
    draw_map(ot_forest, t_north, t_east, t_south, t_west, t_above, turn, g, density, zlevel);
 // Clear the center with some rocks
-   square(this, t_rock, SEEX - 6, SEEY - 6, SEEX + 5, SEEY + 5);
+   square(this, t_rock, SEEX-6, SEEY-6, SEEX+5, SEEY+5);
    int pathx, pathy;
    if (one_in(2)) {
     pathx = rng(SEEX - 6, SEEX + 5);
@@ -14871,3 +14868,4 @@ void map::add_road_vehicles(bool city, int facing)
         }
     }
 }
+
