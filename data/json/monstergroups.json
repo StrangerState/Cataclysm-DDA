@@ -4,11 +4,11 @@
     "name" : "GROUP_FOREST",
     "default" : "mon_squirrel",
     "monsters" : [
-      { "monster" : "mon_bat", "freq" : 10, "cost_multiplier" : 2, "pack_size" : [1,8] }
+      { "monster" : "mon_bat", "freq" : 10, "cost_multiplier" : 2, "pack_size" : [1,8] },
       { "monster" : "mon_bear", "freq" : 5, "cost_multiplier" : 10 },
       { "monster" : "mon_bobcat", "freq" : 20, "cost_multiplier" : 0 },
       { "monster" : "mon_cat", "freq" : 10, "cost_multiplier" : 0 },
-      { "monster" : "mon_chipmunk", "freq" : 50, "cost_multiplier" : 0, "pack_size" : [1,2] }
+      { "monster" : "mon_chipmunk", "freq" : 50, "cost_multiplier" : 0, "pack_size" : [1,2] },
       { "monster" : "mon_cougar", "freq" : 5, "cost_multiplier" : 10 },
       { "monster" : "mon_crow", "freq" : 30, "cost_multiplier" : 0, "pack_size" : [1,14] },
       { "monster" : "mon_deer", "freq" : 20, "cost_multiplier" : 3, "pack_size" : [1,5] },
@@ -20,9 +20,10 @@
       { "monster" : "mon_hare", "freq" : 30, "cost_multiplier" : 5, "pack_size" : [1,6] }
       { "monster" : "mon_mole", "freq" : 10, "cost_multiplier" : 5},
       { "monster" : "mon_moose", "freq" : 10, "cost_multiplier" : 3 },
-      { "monster" : "mon_rabbit", "freq" : 25, "cost_multiplier" : 0, "pack_size" : [1,5] }
-      { "monster" : "mon_squirrel_red", "freq" : 35, "cost_multiplier" : 0, "pack_size" : [1,2] }
-      { "monster" : "mon_weasel", "freq" : 15, "cost_multiplier" : 10 }
+      { "monster" : "mon_rabbit", "freq" : 25, "cost_multiplier" : 0, "pack_size" : [1,5] },
+      { "monster" : "mon_shrew", "freq" : 15, "cost_multiplier" : 0 },
+      { "monster" : "mon_squirrel_red", "freq" : 35, "cost_multiplier" : 0, "pack_size" : [1,2] },
+      { "monster" : "mon_weasel", "freq" : 15, "cost_multiplier" : 10 },
       { "monster" : "mon_wolf", "freq" : 30, "cost_multiplier" : 5, "pack_size" : [2,5] },
       { "monster" : "mon_coyote", "freq" : 10, "cost_multiplier" : 5, "pack_size" : [1,6] },
       { "monster" : "mon_coyote_2", "freq" : 10, "cost_multiplier" : 5, "pack_size" : [1,8] },

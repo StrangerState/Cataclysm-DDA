@@ -135,7 +135,7 @@ void MonsterGroupManager::LoadMonsterGroup(JsonObject &jo)
 }
 
 void init_translation() {
-    // TODO: there must be an better solution for this.
+    // TODO: iteration
     monStr2monId["mon_null"] = mon_null;
     monStr2monId["mon_bear"] = mon_bear;
     monStr2monId["mon_beaver"] = mon_beaver;
@@ -153,12 +153,14 @@ void init_translation() {
     monStr2monId["mon_fox_gray"] = mon_fox_gray;
     monStr2monId["mon_fox_red"] = mon_fox_red;
     monStr2monId["mon_hare"] = mon_hare;
+    monStr2monId["mon_lemming"] = mon_lemming;
     monStr2monId["mon_mink"] = mon_mink;
     monStr2monId["mon_mole"] = mon_mole;
     monStr2monId["mon_moose"] = mon_moose;
     monStr2monId["mon_muskrat"] = mon_muskrat;
     monStr2monId["mon_otter"] = mon_otter;
     monStr2monId["mon_rabbit"] = mon_rabbit;
+    monStr2monId["mon_shrew"] = mon_shrew;
     monStr2monId["mon_squirrel"] = mon_squirrel;
     monStr2monId["mon_squirrel_red"] = mon_squirrel_red;
     monStr2monId["mon_weasel"] = mon_weasel;
