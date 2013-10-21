@@ -15,6 +15,9 @@
       { "monster" : "mon_dog", "freq" : 5, "cost_multiplier" : 25, "pack_size" : [1,12] },
       { "monster" : "mon_fox_gray", "freq" : 10, "cost_multiplier" : 0 },
       { "monster" : "mon_fox_red", "freq" : 15, "cost_multiplier" : 0 },
+      { "monster" : "mon_groundhog", "freq" : 10, "cost_multiplier" : 5, "pack_size" : [1,6] },
+      { "monster" : "mon_hare", "freq" : 30, "cost_multiplier" : 5, "pack_size" : [1,6] }
+      { "monster" : "mon_mole", "freq" : 10, "cost_multiplier" : 5},
       { "monster" : "mon_moose", "freq" : 10, "cost_multiplier" : 3 },
       { "monster" : "mon_rabbit", "freq" : 25, "cost_multiplier" : 0, "pack_size" : [1,5] }
       { "monster" : "mon_squirrel_red", "freq" : 35, "cost_multiplier" : 0, "pack_size" : [1,2] }
