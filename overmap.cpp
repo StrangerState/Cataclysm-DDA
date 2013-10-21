@@ -3433,11 +3433,11 @@ void overmap::place_mongroups() {
                 zg.push_back(
                     mongroup("GROUP_DOMESTIC",
                              rng(0, OMAPX * 2 - 1), rng(0, OMAPY * 2 - 1), 0,
-                             rng(20, 40), rng(30, 50)));
+                             rng(8, 32), rng(8000, 36000)));
                 zg.push_back(
-                    mongroup("GROUP_ZOMBIE",
+                    mongroup("GROUP_MAYBE_ZOMBIE",
                              rng(0, OMAPX * 2 - 1), rng(0, OMAPY * 2 - 1), 0,
-                             rng(10, 30), rng(10, 20)));
+                             rng(20, 40), rng(30, 50)));
             }
         }
     }
