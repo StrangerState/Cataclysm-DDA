@@ -81,12 +81,24 @@ mon_generator,
 // added post 0.8
 mon_turkey, mon_raccoon, mon_opossum, mon_rattlesnake,
 mon_giant_crayfish, mon_fungal_fighter,
+mon_black_rat,
+mon_mosquito_giant, mon_dragonfly_giant, mon_centipede_giant,
+mon_frog_giant, mon_slug_giant,
+mon_spider_jumping_giant, mon_spider_trapdoor_giant,
+mon_spider_web_giant, mon_spider_widow_giant, mon_spider_wolf_giant,
+mon_bat, mon_beaver, mon_bobcat,
+mon_chicken, mon_chipmunk, mon_cow, mon_coyote_wolf,
+mon_deer_mouse, mon_fox_gray, mon_fox_red,
+mon_groundhog, mon_hare, mon_horse, mon_lemming,
+mon_mink, mon_mole, mon_muskrat, mon_otter, mon_pig,
+mon_sheep, mon_shrew, mon_squirrel_red,
+mon_weasel,
 num_monsters
 };
 
 enum m_size {
-MS_TINY = 0, // Rodent
-MS_SMALL, // Half human
+MS_TINY = 0, // Squirrel
+MS_SMALL,   // Dog
 MS_MEDIUM, // Human
 MS_LARGE, // Cow
 MS_HUGE  // TAAAANK
@@ -171,6 +183,10 @@ MF_REGENERATES_50, // Monster regenerates very quickly over time
 MF_FLAMMABLE, // Monster catches fire, burns, and passes the fire on to nearby objects
 MF_REVIVES, // Monster corpse will revive after a short period of time
 MF_CHITIN,  // May produce chitin when butchered
+MF_VERMIN,  // Creature is diminuitive and is subject to special rules (NOT YET IMPLEMENTED)
+MF_VERMIN_BITER,  // Creature is vermin and can inflict painful bites; should imply MF_VERMIN (NOT YET IMPLEMENTED)
+MF_VERMIN_HUNTER,  // Creature is vermin and hunts other vermin; should imply MF_VERMIN (NOT YET IMPLEMENTED)
+MF_WOOL,  // May produce wool when butchered (NOT YET IMPLEMENTED)
 MF_MAX  // Sets the length of the flags - obviously MUST be last
 };
 

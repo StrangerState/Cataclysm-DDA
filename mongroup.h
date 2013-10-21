@@ -11,32 +11,33 @@ typedef FreqDef::iterator FreqDef_iter;
 
 void init_translation();
 
-struct MonsterGroup
-{
+struct MonsterGroup {
     std::string name;
     std::string defaultMonster;
     FreqDef  monsters;
 };
 
 struct mongroup {
- std::string type;
- int posx, posy, posz;
- unsigned char radius;
- unsigned int population;
- bool dying;
- bool diffuse;   // group size ind. of dist. from center and radius invariant
- mongroup(std::string ptype, int pposx, int pposy, int pposz, unsigned char prad,
-          unsigned int ppop) {
-  type = ptype;
-  posx = pposx;
-  posy = pposy;
-  posz = pposz;
-  radius = prad;
-  population = ppop;
-  dying = false;
-  diffuse = false;
- }
- bool is_safe() { return (type == "GROUP_NULL" || type == "GROUP_FOREST"); };
+    std::string type;
+    int posx, posy, posz;
+    unsigned char radius;
+    unsigned int population;
+    bool dying;
+    bool diffuse;   // group size ind. of dist. from center and radius invariant
+    mongroup(std::string ptype, int pposx, int pposy, int pposz,
+             unsigned char prad, unsigned int ppop) {
+        type = ptype;
+        posx = pposx;
+        posy = pposy;
+        posz = pposz;
+        radius = prad;
+        population = ppop;
+        dying = false;
+        diffuse = false;
+    }
+    bool is_safe() {
+        return (type == "GROUP_NULL" || type == "GROUP_FOREST");
+    };
 };
 
 class MonsterGroupManager
