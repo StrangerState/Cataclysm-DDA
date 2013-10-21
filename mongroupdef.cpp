@@ -142,6 +142,7 @@ void init_translation() {
     monStr2monId["mon_beekeeper"] = mon_beekeeper;
     monStr2monId["mon_bobcat"] = mon_bobcat;
     monStr2monId["mon_cat"] = mon_cat;
+    monStr2monId["mon_chipmunk"] = mon_chipmunk;
     monStr2monId["mon_cougar"] = mon_cougar;
     monStr2monId["mon_coyote"] = mon_coyote;
     monStr2monId["mon_coyote_2"] = mon_coyote_2;
@@ -159,6 +160,7 @@ void init_translation() {
     monStr2monId["mon_rabbit"] = mon_rabbit;
     monStr2monId["mon_squirrel"] = mon_squirrel;
     monStr2monId["mon_squirrel_red"] = mon_squirrel_red;
+    monStr2monId["mon_weasel"] = mon_weasel;
     monStr2monId["mon_wolf"] = mon_wolf;
     monStr2monId["mon_wasp"] = mon_wasp;
     monStr2monId["mon_ant_larva"] = mon_ant_larva;
