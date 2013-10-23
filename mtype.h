@@ -97,11 +97,11 @@ num_monsters
 };
 
 enum m_size {
-MS_TINY = 0, // Squirrel
-MS_SMALL,   // Dog
-MS_MEDIUM, // Human
-MS_LARGE, // Cow
-MS_HUGE  // TAAAANK
+    MS_TINY = 0,    // Squirrel
+    MS_SMALL,      // Dog
+    MS_MEDIUM,    // Human
+    MS_LARGE,    // Cow
+    MS_HUGE     // TAAAANK
 };
 
 // These are triggers which may affect the monster's anger or morale.
@@ -240,6 +240,7 @@ struct mtype {
     bool has_placate_trigger(monster_trigger trigger) const;
     bool in_category(std::string category) const;
     bool in_species(std::string _species) const;
+    bool is_vermin() const;
 };
 
 #endif

@@ -9558,7 +9558,7 @@ FFFFFFFFFFFFFFFFFFFFFFFF\n\
         if (one_in(2)) {
          add_spawn("mon_zombie", rng(1, 6), 4, 14);
         } else {
-         add_spawn("mon_zombie", rng(1, 6), 12, 17);
+            place_spawns(g, "GROUP_DOMESTIC", 2, 10, 15, 12, 17, 1);
         }
     } else {
         fill_background(this, &grass_or_dirt);
@@ -9674,8 +9674,10 @@ case ot_farm_field:
         place_items("mechanics", 40, 8, 4, 15, 19, true, 0);
         place_items("home_hw", 50, 4, 19, 7, 19, true, 0);
         place_items("tools", 50, 4, 19, 7, 19, true, 0);
-        if (one_in(10)) {
+        if (one_in(2)) {
             add_spawn("mon_zombie", rng(3, 6), 12, 12);
+        } else {
+            place_spawns(g, "GROUP_DOMESTIC", 2, 0, 0, 15, 15, 1);
         }
 
     } else {
