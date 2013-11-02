@@ -1018,7 +1018,7 @@
     "death_function":"NORMAL",
     "special_attack":"NONE",
     "description":"The Northern short-tailed shrew, an insectvorous mammal that resembles a cross between a mouse and a mole.  Notably for a mammal, it has a venomous bite, which can prove painful for humans.",
-    "flags":["HEARS", "VENOM", "ANIMAL", "WARM", "FUR", "BONES", "VERMIN"],
+    "flags":["HEARS", "VENOM", "ANIMAL", "WARM", "FUR", "BONES"],
     "fear_triggers":["SOUND", "PLAYER_CLOSE"],
     "categories":["WILDLIFE"]
   },
